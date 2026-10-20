@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAFIA — Tungi shahar</title>
+<style>
+:root{--bg:#0b0b10;--panel:#15151d;--panel2:#1d1d27;--red:#f04452;--red2:#a90f24;--text:#f5f5f7;--muted:#a4a4b2;--line:#30303b;--green:#55d6a1}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#281018 0,#0b0b10 48%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+header{padding:24px 18px;border-bottom:1px solid #ffffff12;display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1100px;margin:auto}
+.brand{font-size:24px;font-weight:900;letter-spacing:2px}.brand span{color:var(--red)}.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:5px 9px;border-radius:99px}
+main{max-width:1100px;margin:28px auto;padding:0 16px 48px}.hero{margin-bottom:24px}.eyebrow{color:var(--red);font-size:12px;letter-spacing:3px;font-weight:800}.hero h1{font-size:clamp(32px,6vw,56px);line-height:1.05;margin:8px 0 12px}.hero p{color:var(--muted);max-width:650px;margin:0}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.panel{background:#15151deF;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 15px 40px #0003}.panel h2{font-size:18px;margin:0 0 14px}.row{display:flex;gap:10px;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px;margin-bottom:12px}label{font-size:13px;color:var(--muted)}input,select{width:100%;background:#0c0c12;border:1px solid #383844;border-radius:10px;padding:12px;color:var(--text);font:inherit;outline:none}input:focus,select:focus{border-color:var(--red)}
+button{border:0;border-radius:10px;padding:11px 15px;font:700 14px system-ui;cursor:pointer;transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(1.1)}.primary{background:linear-gradient(135deg,var(--red),var(--red2));color:white}.secondary{background:var(--panel2);color:white;border:1px solid var(--line)}.danger{background:#42151c;color:#ff9aa3;border:1px solid #712631}.muted{color:var(--muted)}.hidden{display:none!important}.status{padding:12px 14px;background:#21151a;border:1px solid #56232d;border-radius:12px;color:#ffb5bd;margin:12px 0}.pill{display:inline-block;border-radius:99px;background:#2c151b;color:#ffadb5;padding:4px 9px;font-size:12px;font-weight:700}.players{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px}.player{background:#1b1b25;border:1px solid var(--line);border-radius:12px;padding:12px}.player strong{display:block}.player small{color:var(--muted)}.player.dead{opacity:.5;text-decoration:line-through}.role{font-size:12px;color:#ff9ca6;margin-top:5px}.chatlog{height:210px;overflow:auto;background:#0d0d13;border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}.msg{margin:0 0 8px;overflow-wrap:anywhere}.msg b{color:#ff8792}.actionbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.section{margin-top:16px}.note{font-size:12px;color:var(--muted);margin-top:10px}.full{grid-column:1/-1}.rulelist{padding-left:19px;color:var(--muted);margin-bottom:0}.rulelist li{margin:6px 0}footer{text-align:center;color:#777783;font-size:12px;padding:22px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}header{padding:18px 16px}.panel{padding:16px}.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<header><div class="brand">☾ MAFIA<span>.</span></div><div class="tag">TUNGI SHAHAR · UZ</div></header>
+<main>
+<section class="hero"><div class="eyebrow">ISHONCHING KIMDA?</div><h1>Shahar uxlaydi.<br><span style="color:var(--red)">Mafia uyg‘onadi.</span></h1><p>Do‘stlaringni yig‘, rollarni taqsimla va kim yolg‘on gapirayotganini aniqlang.</p></section>
+<div class="grid">
+<section class="panel" id="setup">
+<h2>◈ O‘yinni boshlash</h2>
+<div class="field"><label for="nickname">Ismingiz</label><input id="nickname" maxlength="20" placeholder="Masalan, Jasur" value="O‘yinchi"></div>
+<div class="row"><div class="field"><label for="room">Xona kodi</label><input id="room" maxlength="8" placeholder="Masalan, MAFIA7"></div><div class="field"><label for="count">O‘yinchilar soni</label><select id="count"><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div></div>
+<div class="row"><button class="primary" id="create">＋ Xona yaratish</button><button class="secondary" id="join">↗ Xonaga kirish</button></div>
+<div class="status" id="setupStatus">Bu demo bitta qurilmada ishlaydi. Haqiqiy internet orqali do‘stlar bilan o‘ynash uchun server ulash kerak.</div>
+<div class="note">Xona kodi demo ichida ko‘rsatiladi. Boshqa qurilmalardan kirish va jonli chat hozircha serverga ulanmagan.</div>
+</section>
+<section class="panel">
+<h2>♜ Qoidalar</h2>
+<ul class="rulelist"><li>Har bir o‘yinchi maxfiy rol oladi.</li><li>Kechasi Mafia nishon tanlaydi; Doktor himoya qiladi.</li><li>Kunduz hamma muhokama qilib ovoz beradi.</li><li>Mafia yo‘q qilinsa, shahar yutadi. Mafia soni tinch aholiga tenglashsa, Mafia yutadi.</li></ul>
+<div class="section"><h2>♟ Rollar</h2><div class="row"><span class="pill">Mafia / Don</span><span class="pill">Komissar</span><span class="pill">Doktor</span><span class="pill">Tinch aholi</span></div></div>
+</section>
+<section class="panel full hidden" id="game">
+<div class="row" style="justify-content:space-between;align-items:center"><div><div class="eyebrow">O‘YIN XONASI</div><h2 style="font-size:24px;margin:4px 0" id="roomTitle">MAFIA</h2><div class="muted" id="phaseText">Tayyorgarlik</div></div><div><span class="pill" id="phasePill">KUN</span></div></div>
+<div class="status" id="announcement">O‘yin boshlashga tayyor.</div>
+<div class="players section" id="players"></div>
+<div class="actionbar"><button class="primary" id="startGame">▶ O‘yinni boshlash</button><button class="secondary" id="nextPhase">Keyingi bosqich →</button><button class="secondary" id="showRole">Mening rolim</button><button class="danger" id="reset">O‘yinni qayta boshlash</button></div>
+<div class="section panel" style="padding:14px;background:#111118"><h2>✦ Harakat</h2><div class="row"><div class="field"><label for="target">Nishon / ovoz berish</label><select id="target"></select></div><div class="field"><label for="action">Harakat</label><select id="action"><option value="vote">Kunduzgi ovoz</option><option value="mafia">Mafia nishoni (demo)</option><option value="doctor">Doktor himoyasi (demo)</option><option value="detective">Komissar tekshiruvi (demo)</option></select></div></div><button class="primary" id="doAction">Harakatni bajarish</button><p class="note">Demo rejimida rollar va harakatlar shu qurilmada simulyatsiya qilinadi.</p></div>
+<div class="section panel" style="padding:14px;background:#111118"><h2>☷ Xona chati</h2><div class="chatlog" id="chatlog"><p class="msg"><b>System:</b> Xonaga xush kelibsiz!</p></div><div class="row"><div class="field" style="margin:0"><input id="chatInput" maxlength="240" placeholder="Xabar yozing..."></div><button class="primary" id="sendChat">Yuborish</button></div></div>
+</section>
+</div>
+</main><footer>MAFIA. · O‘zbekcha brauzer demo · O‘yin uchun, haqiqiy pul tikish yo‘q.</footer>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+let state=null;
+const rolesFor=n=>{let r=[];let mafia=n>=10?3:n>=7?2:1;r.push('Don');for(let i=1;i<mafia;i++)r.push('Mafia');r.push('Komissar','Doktor');while(r.length<n)r.push('Tinch aholi');return r};
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function makeRoom(joining=false){let name=$('nickname').value.trim()||'O‘yinchi';let code=($('room').value.trim()||('MAFIA'+Math.random().toString(36).slice(2,5).toUpperCase())).toUpperCase();$('room').value=code;
+let n=Number($('count').value);let names=[name];for(let i=2;i<=n;i++)names.push('O‘yinchi '+i);
+let roles=shuffle(rolesFor(n));state={code,players:names.map((nm,i)=>({id:i,name:nm,role:roles[i],alive:true})),phase:'Tayyorgarlik',day:1,started:false,me:0,logs:[]};
+$('game').classList.remove('hidden');$('roomTitle').textContent='XONA: '+code;$('setupStatus').textContent=joining?'Demo xona ochildi: '+code:'Xona yaratildi: '+code+' — kodni do‘stlaringga yubor.';log('System',joining?'Demo xonaga kirdingiz.':'Xona yaratildi. O‘yinchilar tayyor!');render();}
+function log(who,msg){if(!state)return;state.logs.push({who,msg});const el=$('chatlog');el.innerHTML='';state.logs.slice(-80).forEach(m=>{let p=document.createElement('p');p.className='msg';let b=document.createElement('b');b.textContent=m.who+': ';p.append(b,document.createTextNode(m.msg));el.appendChild(p)});el.scrollTop=el.scrollHeight}
+function render(){if(!state)return;$('phaseText').textContent=state.phase+' · '+(state.day>1?' '+state.day+'-kun':'');$('phasePill').textContent=state.phase.toUpperCase();$('players').innerHTML='';state.players.forEach(p=>{let d=document.createElement('div');d.className='player'+(!p.alive?' dead':'');let s=document.createElement('strong');s.textContent=(p.id===state.me?'★ ':'')+p.name;let sm=document.createElement('small');sm.textContent=p.alive?'Tirik':'O‘yindan chiqdi';d.append(s,sm);if(p.id===state.me&&state.started){let rr=document.createElement('div');rr.className='role';rr.textContent='Sizning rolingiz: '+p.role;d.append(rr)}$('players').append(d)});
+let t=$('target');t.innerHTML='';state.players.filter(p=>p.alive&&p.id!==state.me).forEach(p=>{let o=document.createElement('option');o.value=p.id;o.textContent=p.name;t.append(o)});if(!t.options.length){let o=document.createElement('option');o.textContent='Nishon yo‘q';t.append(o)}
+$('startGame').disabled=state.started;$('startGame').textContent=state.started?'O‘yin boshlandi':'▶ O‘yinni boshlash';
+}
+function alive(){return state.players.filter(p=>p.alive)}
+function checkWin(){let a=alive(),m=a.filter(p=>['Don','Mafia'].includes(p.role)).length;if(m===0){$('announcement').textContent='🏆 Shahar g‘alaba qozondi! Barcha Mafia topildi.';state.phase='O‘yin tugadi';return true}if(m>=a.length-m){$('announcement').textContent='☠ Mafia g‘alaba qozondi!';state.phase='O‘yin tugadi';return true}return false}
+$('create').onclick=()=>makeRoom(false);$('join').onclick=()=>makeRoom(true);
+$('startGame').onclick=()=>{if(!state)return;state.started=true;state.phase='Kecha';$('announcement').textContent='Tun tushdi. Rollaringizni eslab qoling; demo barcha rollarni shu qurilmada ko‘rsatadi.';log('System','O‘yin boshlandi. 1-kecha.');render()};
+$('nextPhase').onclick=()=>{if(!state||!state.started)return;if(state.phase==='Kecha'){state.phase='Kunduz';state.day++;$('announcement').textContent='☀️ Tong otdi. Muhokama qiling va ovoz bering.';log('System','Kunduz boshlandi. Ovoz berish mumkin.')}else if(state.phase==='Kunduz'){state.phase='Kecha';$('announcement').textContent='🌙 Tun tushdi. Mafia va maxsus rollar harakat qiladi.';log('System','Kecha boshlandi.')}else{state.phase='Kecha';state.day=1;state.players.forEach(p=>p.alive=true);state.started=false;$('announcement').textContent='Yangi raundga tayyor.'}render()};
+$('showRole').onclick=()=>{if(!state)return;let p=state.players[state.me];$('announcement').textContent=state.started?'Sizning rolingiz: '+p.role+'.': 'Avval o‘yinni boshlang.';};
+$('doAction').onclick=()=>{if(!state||!state.started){$('announcement').textContent='Avval o‘yinni boshlang.';return}if(state.phase==='O‘yin tugadi')return;let target=state.players.find(p=>p.id===Number($('target').value));if(!target){$('announcement').textContent='Nishon tanlanmadi.';return}let action=$('action').value;if(action==='doctor'){log(state.players[0].name,'Doktor '+target.name+' ni himoya qilishini bildirdi (demo).');$('announcement').textContent=target.name+' himoya uchun tanlandi.'}else if(action==='detective'){$('announcement').textContent=target.name+' ning roli: '+target.role+'.';log('Komissar','Tekshiruv bajarildi (demo).')}else if(action==='mafia'){target.alive=false;log('System','Kechadagi hodisa: '+target.name+' o‘yindan chiqdi.');$('announcement').textContent=target.name+' nishon qilindi (demo).';render();checkWin();render()}else{target.alive=false;log('Ovoz','Ovoz natijasi: '+target.name+' o‘yindan chiqarildi (demo).');$('announcement').textContent=target.name+' ovoz bilan o‘yindan chiqdi.';render();checkWin();render()}};
+function send(){let v=$('chatInput').value.trim();if(!v)return;log($('nickname').value.trim()||'O‘yinchi',v);$('chatInput').value=''}$('sendChat').onclick=send;$('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
+$('reset').onclick=()=>{state=null;$('game').classList.add('hidden');$('setupStatus').textContent='O‘yin qayta tiklandi. Yangi xona yaratishingiz mumkin.'};
+})();
+</script></body></html>
